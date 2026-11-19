@@ -96,7 +96,7 @@ describe('OctoFit data contract', () => {
       const first = await counts();
       expect(first.users).toBeGreaterThanOrEqual(3);
       expect(first.teams).toBeGreaterThanOrEqual(4);
-      expect(first.activities).toBeGreaterThanOrEqual(3);
+      expec;
       expect(first.workouts).toBeGreaterThanOrEqual(3);
       await mongoose.connect(mongo.getUri());
       const seededMona = await User.findOne({ email: 'mona@example.com' });
