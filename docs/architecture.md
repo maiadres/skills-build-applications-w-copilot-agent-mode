@@ -16,6 +16,7 @@ OctoFit Tracker is a three-tier application for a school fitness program. The st
 - Express API: `8000`
 - Vite frontend: `5173`
 - The browser calls relative `/api` paths. Vite proxies them to `http://localhost:8000`, so the unauthenticated API port stays private in Codespaces. `VITE_API_BASE_URL` can override the base URL.
+- The backend's displayed API URL uses `https://${CODESPACE_NAME}-8000.app.github.dev` only when `CODESPACE_NAME` is set; otherwise it falls back to `http://localhost:8000`.
 
 ## API contract
 
