@@ -63,6 +63,6 @@ jobs:
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
       - name: Enable next step workflow
-        run: gh workflow enable "Step 1"
+        run: gh workflow enable 1-step.yml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

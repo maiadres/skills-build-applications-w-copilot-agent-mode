@@ -16,6 +16,7 @@ OctoFit Tracker is a three-tier application for a school fitness program. The st
 - Express API: `8000`
 - Vite frontend: `5173`
 - The browser calls relative `/api` paths. Vite proxies them to `http://localhost:8000`, so the unauthenticated API port stays private in Codespaces. `VITE_API_BASE_URL` can override the base URL.
+- The backend's displayed API URL uses `https://${CODESPACE_NAME}-8000.app.github.dev` only when `CODESPACE_NAME` is set; otherwise it falls back to `http://localhost:8000`.
 
 ## API contract
 
@@ -30,15 +31,15 @@ OctoFit Tracker is a three-tier application for a school fitness program. The st
 
 Record your plan here before editing code.
 
-- Presentation tier decision:
-- Logic tier decision:
-- Data tier decision:
-- Activity tracking approach:
-- Team management approach:
-- Leaderboard approach:
-- Workout suggestions approach:
+- Presentation tier decision: Build routed React 19 components under `octofit-tracker/frontend/src/components`, using one shared API client for all relative `/api` requests and explicit loading, empty, success, and accessible error states.
+- Logic tier decision: Keep Express route handlers thin and place validation and business behavior in `octofit-tracker/backend/src/services/octofitService.ts`; return explicit 4xx responses for invalid or missing resources instead of leaking Mongoose cast errors.
+- Data tier decision: Use Mongoose schemas and one seed entry point to preserve the four data entities, preserve existing application data, and make repeated seeding deterministic and idempotent.
+- Activity tracking approach: Validate `userId` and `teamId` as existing ObjectIds, require a valid activity type and positive minutes, then create the activity with the submitted user/team/type/minutes, computed points, and an occurrence timestamp.
+- Team management approach: Require a team name and mascot, default `members` to an empty array, accept existing user IDs, and keep team identity and membership linked in Mongoose.
+- Leaderboard approach: Aggregate submitted activity `points` by team, sort totals from highest to lowest, and assign a sequential 1-based rank in the API response.
+- Workout suggestions approach: Resolve a seeded or existing user by email, determine their focus from a recent activity pattern or `fitnessGoal`, return matching workout suggestions with a reason, and return a deliberate 4xx for unknown emails.
 
-## Test plan
+# Test plan
 
 Record the commands you run and what each failure means.
 
