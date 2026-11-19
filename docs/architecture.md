@@ -38,7 +38,7 @@ Record your plan here before editing code.
 - Leaderboard approach: Aggregate submitted activity `points` by team, sort totals from highest to lowest, and assign a sequential 1-based rank in the API response.
 - Workout suggestions approach: Resolve a seeded or existing user by email, determine their focus from a recent activity pattern or `fitnessGoal`, return matching workout suggestions with a reason, and return a deliberate 4xx for unknown emails.
 
-# Test plan
+## Test plan
 
 Record the commands you run and what each failure means.
 
